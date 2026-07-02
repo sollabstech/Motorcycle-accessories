@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+:root {
+  /* fallback neutral dark/charcoal palette - overwritten at runtime by usePaletteFromLogo() */
+  --color-primary: #2b2b2b;
+  --color-primary-dark: #1a1a1a;
+  --color-secondary: #4a4a4a;
+  --color-accent: #e8590c;
+  --color-text-on-primary: #f5f5f5;
+  --color-text-dark: #1b1b1b;
+  --color-text-light: #f5f5f5;
+  --color-bg: #f7f7f7;
+  --color-surface: #ffffff;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-text-on-primary: var(--color-text-on-primary);
+  --color-text-dark: var(--color-text-dark);
+  --color-text-light: var(--color-text-light);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+
+  --font-heading: var(--font-quantico);
+  --font-body: var(--font-barlow);
+
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-shimmer: shimmer 1.4s ease infinite;
+  --animate-kenburns: kenburns 9s ease-in-out infinite alternate;
+  --animate-pulse-glow: pulseGlow 1.4s ease-in-out infinite;
+  --animate-border-pulse: borderPulse 2.2s ease-in-out infinite;
+  --animate-float-bounce: floatBounce 2.4s ease-in-out infinite;
+  --animate-glow-pulse: glowPulse 4s ease-in-out infinite;
+  --animate-heart-pop: heartPop 0.4s ease;
+  --animate-badge-bounce: bounceBadge 0.5s ease;
+  --animate-testi-scroll: testiScroll 30s linear infinite;
+  --animate-engine-rev: engineRev 0.4s ease-in-out;
+  --animate-speed-lines: speedLines 2.4s ease-in infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+@keyframes pulseGlow {
+  0%, 100% { text-shadow: 0 0 2px var(--color-accent), 0 0 0 var(--color-accent); }
+  50% { text-shadow: 0 0 10px var(--color-accent), 0 0 18px var(--color-accent); }
+}
+@keyframes borderPulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 50%, transparent); }
+  50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-accent) 0%, transparent); }
+}
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 30px color-mix(in srgb, var(--color-accent) 10%, transparent); }
+  50% { box-shadow: 0 0 55px color-mix(in srgb, var(--color-accent) 28%, transparent); }
+}
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+@keyframes bounceBadge {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.5); }
+  60% { transform: scale(0.85); }
+}
+@keyframes testiScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes engineRev {
+  0%, 100% { transform: translateX(0) scale(1); }
+  15% { transform: translateX(-2px) scale(1.01); }
+  30% { transform: translateX(2px) scale(1.02); }
+  45% { transform: translateX(-2px) scale(1.02); }
+  60% { transform: translateX(2px) scale(1.03); }
+  75% { transform: translateX(-1px) scale(1.02); }
+  90% { transform: translateX(1px) scale(1.01); }
+}
+@keyframes speedLines {
+  0% { transform: translateX(-30%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(130%); opacity: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-dark);
+  overflow-x: hidden;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shimmer-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+}
+.shimmer-sweep:hover::after {
+  left: 130%;
+}
